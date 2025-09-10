@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dema Nwana - My Profile</title>
+</head>
+<body>
 
+  <div id="menu">
+    <ul>
+      <li><a href="#info">Profile</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#websites">Website</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </div>
+
+  <div id="info">
+    <h1>Hi, I'm Dema Nwana</h1>
+    <p>I'm a 3rd year student studying Information Technology with a minor in Economics.</p>
+    <img src="profile.jpg" alt="Profile Picture" width="200">
+  </div>
+
+  <div id="education">
+    <h1>Education</h1>
+    <p>I go to St. John’s University and I'm working towards a B.S. in IT.</p>
+    <ul>
+      <li>Minor in Economics</li>
+      <li>Expected graduation: 2027</li>
+    </ul>
+  </div>
+
+  <div id="experience">
+    <h1>Work and Projects</h1>
+    <ul>
+      <li>Records Management Assistant</li>
+      <li>Did a Power BI project where I looked at sales, outlets, products, and customer behavior for a fake store</li>
+    </ul>
+  </div>
+
+  <div id="skills">
+    <h1>Programming Skills</h1>
+    <table>
+      <tr>
+        <td>Java</td>
+        <td>Intermediate</td>
+      </tr>
+      <tr>
+        <td>SQL</td>
+        <td>Intermediate</td>
+      </tr>
+      <tr>
+        <td>Data Visualization (Power BI, Excel)</td>
+        <td>Intermediate</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="interests">
+    <h1>Things I Like</h1>
+    <p>I like reading, playing basketball and soccer, and listening to music.</p>
+  </div>
+
+  <div id="favorites">
+    <h1>Favorites</h1>
+
+    <p><strong>Song:</strong> Him All Along by Gunna</p>
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/w7Wf0h1Q8a4" allowfullscreen></iframe>
+
+    <p><strong>Movie:</strong> Brown Sugar</p>
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/1cMkcfL8w5k" allowfullscreen></iframe>
+
+    <p><strong>TV Show:</strong> Orphan Black</p>
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/_Cqq9rAEync" allowfullscreen></iframe>
+  </div>
+
+  <div id="websites">
+    <h1>Favorite Website</h1>
+    <ul>
+      <li><a href="https://www.espn.com/" target="_blank">ESPN</a> - I check it for sports news and updates.</li>
+    </ul>
+  </div>
+
+  <div id="projects">
+    <h1>Projects in This Class</h1>
+    <ul>
+      <li><a href="index.html">Project 1: My Profile Page</a></li>
+    </ul>
+  </div>
