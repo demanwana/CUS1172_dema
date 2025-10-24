@@ -1,17 +1,22 @@
 :root {
   --gradient: linear-gradient(
     180deg,
-    rgba(45, 112, 1253, 0.73) 0%,
+    rgba(45, 112, 125, 0.73) 0%, 
     #163e92 100%
   );
   --dark: #001747;
   --grey: #b1bacb;
   --grey-border: rgba(210, 210, 210, 0.75);
   --grey-light: #eeeeee;
-  --grey-dark: $405175;
+  --grey-dark: #405175; 
   --blue: #2d70fd;
   --green: #00d8a7;
   --white: #ffffff;
+  
+  /* 💡 NEW: Priority Colors */
+  --priority-high: #dc3545; 
+  --priority-medium: #ffc107; 
+  --priority-low: #28a745; 
 }
 
 body {
@@ -24,29 +29,11 @@ body {
   align-items: center;
 }
 
-.btn {
-  color: var(--white);
-  font-size: 1.1rem;
-  padding: 0.7rem 1.5rem;
-  border-radius: 0.3rem;
-  background-color: var(--blue);
-  border: none;
-  position: absolute;
-  right: 0.5rem;
-  bottom: 0.5rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-/* Todo Container */
+
 
 .todo {
   display: flex;
@@ -70,127 +57,109 @@ h2 {
 
 .input {
   position: relative;
-  display: flex;
+  /* 💡 MODIFIED: Use grid for layout of input, select, and button */
+  display: grid; 
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: center; 
 }
 
 .input-field {
+  grid-column: 1 / 2;
   width: 100%;
-  border: 0.06rem solid #d2d2d2bf;
+  border: 0.06rem solid var(--grey-border);
   border-radius: 0.5rem;
   padding: 1.25rem;
   font-size: 1rem;
+}
+
+
+#priorityInput {
+  grid-column: 1 / 2;
+  border: 0.06rem solid var(--grey-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+
+.btn {
+  position: static; 
+  grid-column: 2 / 3;
+  color: var(--white);
+  font-size: 1.1rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.3rem;
+  background-color: var(--blue);
+  border: none;
+  align-self: stretch; /* Stretch to fill grid cell height */
 }
 
 input[type="text"]::placeholder {
   color: var(--grey);
 }
 
+
 .todo-container {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem; 
+    margin-bottom: 0.6rem;
+    border-radius: 0.5rem;
+    background-color: var(--grey-light); 
+    border-left: 6px solid transparent; /* For priority color */
 }
 
-ul {
-  padding: 0;
-  margin: 0;
-  overflow-y: scroll;
+
+.high-priority {
+    border-left-color: var(--priority-high);
+}
+.medium-priority {
+    border-left-color: var(--priority-medium);
+}
+.low-priority {
+    border-left-color: var(--priority-low);
 }
 
-li {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 1.3rem;
+
+.task-title {
+    flex-grow: 1; 
+    color: var(--dark);
+    margin-left: 1rem;
+    cursor: pointer;
+    align-self: center;
+    /* Reset existing #todoList p styles */
+    display: inline;
+    gap: 0;
 }
 
-#todoList p {
-  display: flex;
-  gap: 1rem;
-  color: var(--dark);
-  align-items: center;
+.task-priority,
+.task-status {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    margin-left: 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-weight: 500;
 }
 
-#todoList .disabled {
-  color: #8f98a8;
+
+.task-status {
+    background-color: var(--blue);
+    color: var(--white);
 }
 
-.disabled {
-  display: flex;
-  text-decoration: line-through;
-}
 
-input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
-}
-
-input[type="checkbox"]::before {
-  content: "\2713";
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  font-size: 1.7rem;
-  text-align: center;
-  border: 0.06rem solid var(--grey-border);
-  border-radius: 50%;
-  color: transparent;
-}
-
-input[type="checkbox"]:checked::before {
-  color: var(--white);
-  background-color: var(--green);
-  border: 0.06rem solid var(--green);
-  border-radius: 50%;
-}
-
-.counter {
-  border: 0.06rem solid var(--grey-light);
-}
-
-.counter-container {
-  height: 2rem;
-  display: flex;
-  justify-content: space-between;
-  color: var(--grey);
-}
-
-.counter-container p {
-  align-self: center;
-}
-
-.counter-container button {
-  border: none;
-  background-color: transparent;
-  color: var(--grey);
-  font-size: 1rem;
-}
-
-.footer {
-  display: flex;
-  gap: 1.8rem;
-  background-color: var(--white);
-  padding: 1.2rem;
-  border-radius: 0.5rem;
-}
-
-.made-by,
-.author {
-  font-size: 0.9rem;
-}
-
-.made-by {
-  color: var(--grey-dark);
-}
-
-.author {
-  color: var(--blue);
-  font-weight: bold;
+.todo-container .disabled {
+    text-decoration: line-through;
+    color: var(--grey);
 }
 
 .scroll {
   height: 15rem;
+  padding: 0;
+  overflow-y: scroll;
   scrollbar-width: thin;
 }
 
