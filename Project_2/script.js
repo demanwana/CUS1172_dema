@@ -6,6 +6,9 @@ const todoCount = document.getElementById("todoCount");
 const addButton = document.querySelector(".btn");
 const deleteButton = document.getElementById("deleteButton");
 
+// 💡 NEW: Constant for the Priority Selector input
+const priorityInput = document.getElementById("priorityInput"); 
+
 document.addEventListener("DOMContentLoaded", function () {
   addButton.addEventListener("click", addTask);
   todoInput.addEventListener("keydown", function (event) {
@@ -19,11 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function addTask() {
-  const newTask = todoInput.value.trim();
-  if (newTask !== "") {
-    todo.push({ text: newTask, disabled: false });
+  const newTaskText = todoInput.value.trim();
+  // 💡 NEW: Get priority value
+  const newPriority = priorityInput ? priorityInput.value : "medium";
+  
+  if (newTaskText !== "") {
+   
+    todo.push({ 
+      title: newTaskText, 
+      disabled: false, // Used for completion check
+      priority: newPriority, 
+      status: "pending" 
+    });
     saveToLocalStorage();
     todoInput.value = "";
+    // Reset priority input to default
+    if (priorityInput) priorityInput.value = "medium"; 
     displayTasks();
   }
 }
@@ -31,15 +45,24 @@ function addTask() {
 function displayTasks() {
   todoList.innerHTML = "";
   todo.forEach((item, index) => {
+  
+    const currentStatus = item.disabled ? "completed" : "pending";
+    item.status = currentStatus; // Sync status property
+    
     const p = document.createElement("p");
+    // 💡 UPDATED: Use item.title and add priority class to container
     p.innerHTML = `
-      <div class="todo-container">
+      <div class="todo-container ${item.priority}-priority">
         <input type="checkbox" class="todo-checkbox" id="input-${index}" ${
       item.disabled ? "checked" : ""
     }>
+        
         <p id="todo-${index}" class="${
       item.disabled ? "disabled" : ""
-    }" onclick="editTask(${index})">${item.text}</p>
+    } task-title" onclick="editTask(${index})">${item.title}</p>
+        
+        <span class="task-priority">${item.priority}</span>
+        <span class="task-status">${item.status}</span>
       </div>
     `;
     p.querySelector(".todo-checkbox").addEventListener("change", () =>
@@ -52,7 +75,8 @@ function displayTasks() {
 
 function editTask(index) {
   const todoItem = document.getElementById(`todo-${index}`);
-  const existingText = todo[index].text;
+ 
+  const existingText = todo[index].title;
   const inputElement = document.createElement("input");
 
   inputElement.value = existingText;
@@ -62,7 +86,8 @@ function editTask(index) {
   inputElement.addEventListener("blur", function () {
     const updatedText = inputElement.value.trim();
     if (updatedText) {
-      todo[index].text = updatedText;
+      // 💡 UPDATED: Save to 'title' property
+      todo[index].title = updatedText;
       saveToLocalStorage();
     }
     displayTasks();
@@ -71,6 +96,8 @@ function editTask(index) {
 
 function toggleTask(index) {
   todo[index].disabled = !todo[index].disabled;
+  // 💡 UPDATED: Update the 'status' property
+  todo[index].status = todo[index].disabled ? "completed" : "pending";
   saveToLocalStorage();
   displayTasks();
 }
