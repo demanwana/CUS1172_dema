@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Search</title>
+
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
+
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+  
+    <script src="app_code_dev.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <h2 class="mb-4 text-center">Employee Search</h2>
+
+            <form onsubmit="return false;" id="queryForm">
+                <div class="mb-3">
+                    <label class="form-label">Search by Name</label>
+                    <input type="text" id="nameQuery" class="form-control">
+                    <button 
+                        class="btn btn-primary mt-2"
+                        onclick="updateView(this)"
+                        data-querytype="by_name">
+                        Search
+                    </button>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <label class="form-label">Search by Age Range</label>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" id="startAgeQuery" class="form-control" value="1">
+                        </div>
+                        <div class="col">
+                            <input type="number" id="endAgeQuery" class="form-control" value="99">
+                        </div>
+                    </div>
+                    <button 
+                        class="btn btn-success mt-2"
+                        onclick="updateView(this)"
+                        data-querytype="by_age_range">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="results" class="mt-4"></div>
+    </div>
+</body>
+</html>
+
+<script id="show_results_view" type="text/x-handlebars-template">
+    <ul class="list-group">
+    {{#each employees}}
+        <li class="list-group-item">
+            <strong>{{this.employee_name}}</strong><br>
+            ID: {{this.id}} |
+            Salary: ${{this.employee_salary}} |
+            Age: {{this.employee_age}}
+        </li>
+    {{/each}}
+    </ul>
+</script>
